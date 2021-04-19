@@ -16,12 +16,23 @@ app.use(express.json());
 let public = path.join(__dirname, "public");
 app.use(express.static(public));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-});
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useCreateIndex: true,
+//   useFindAndModify: false,
+// });
+
+mongoose.connect(
+  process.env.MONGODB_URI ||
+    "mongodb+srv://tuan2121:Hoang2121!@cluster0.pljzm.mongodb.net",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  }
+);
 
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, "public")));
 
