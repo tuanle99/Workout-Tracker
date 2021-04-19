@@ -3,12 +3,6 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const path = require("path");
 const db = require("./models");
-const dayjs = require("dayjs");
-const range = dayjs().subtract(7, "day").format("YYYY-MM-DDTHH:mm:ss");
-console.log("dayjs calc test, range is = " + range);
-console.log(
-  "other date test js" + new Date().setDate(new Date().getDate() - 6)
-);
 
 const PORT = process.env.PORT || 3000;
 
@@ -65,7 +59,6 @@ app.get("/api/workouts/range", (req, res) => {
 app.post("/api/workouts", ({ body }, res) => {
   db.Workout.create(body)
     .then((newWorkout) => {
-      console.log(newWorkout);
       res.json(newWorkout);
     })
     .catch((err) => {
