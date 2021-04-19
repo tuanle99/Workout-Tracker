@@ -4,6 +4,11 @@ const mongoose = require("mongoose");
 const path = require("path");
 const db = require("./models");
 const dayjs = require("dayjs");
+const range = dayjs().subtract(7, "day").format("YYYY-MM-DDTHH:mm:ss");
+console.log("dayjs calc test, range is = " + range);
+console.log(
+  "other date test js" + new Date().setDate(new Date().getDate() - 6)
+);
 
 const PORT = process.env.PORT || 3000;
 
@@ -16,23 +21,12 @@ app.use(express.json());
 let public = path.join(__dirname, "public");
 app.use(express.static(public));
 
-// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   useCreateIndex: true,
-//   useFindAndModify: false,
-// });
-
-mongoose.connect(
-  process.env.MONGODB_URI ||
-    "mongodb+srv://tuan2121:Hoang2121!@cluster0.pljzm.mongodb.net",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  }
-);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+});
 
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, "public")));
 
@@ -80,6 +74,10 @@ app.post("/api/workouts", ({ body }, res) => {
 });
 
 app.put("/api/workouts/:id", (req, res) => {
+  console.log("CREATE NEW EXERCISE API ROUTE CALLED");
+  console.log("req body is" + JSON.stringify(req.body));
+  console.log("req.params.id is" + req.params.id);
+
   db.Workout.findOneAndUpdate(
     {
       _id: req.params.id,
@@ -95,9 +93,9 @@ app.put("/api/workouts/:id", (req, res) => {
 
     (err, doc) => {
       if (err) {
-        console.log("Error!");
+        console.log("there was an error with your findOneAndUpdate query");
       }
-      console.log("Doc: " + doc);
+      console.log("doc is" + doc);
     }
   )
     .then((updatedWorkout) => {
