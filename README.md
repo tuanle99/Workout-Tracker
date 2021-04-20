@@ -4,13 +4,11 @@
 
 Fitness Tracker is an application that allow you to keep track of your your out.
 
+![heroku](https://bootcamp-workout-tracker-app.herokuapp.com/)
+
 ## Create New Workout
 
 ![new_workout](./public/images/new_workout.gif)
-
-## Heroku
-
-![heroku](./public/images/heroku.PNG)
 
 ## Database - MongoDB Atlas
 
