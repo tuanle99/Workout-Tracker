@@ -3,6 +3,7 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const path = require("path");
 const db = require("./models");
+require("dotenv").config();
 
 const PORT = process.env.PORT || 3000;
 
@@ -15,22 +16,12 @@ app.use(express.json());
 let public = path.join(__dirname, "public");
 app.use(express.static(public));
 
-// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   useCreateIndex: true,
-//   useFindAndModify: false,
-// });
-
-mongoose.connect(
-  "mongodb+srv://tuan2121:Hoang2121!@cluster0.pljzm.mongodb.net",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  }
-);
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+});
 
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, "public")));
 
